@@ -6,8 +6,8 @@ public class Fractional_knapsack_greedy
 
     static void Profit_based(float profit[], float weight[], int n) 
     {    
-         float total_profit = 0;
-         float w = 0;
+        float total_profit = 0;
+        float w = 0;
         float[] x = new float[n];
 
         for (int i = 0; i < n; i++) 

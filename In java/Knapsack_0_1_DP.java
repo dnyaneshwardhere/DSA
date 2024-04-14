@@ -37,16 +37,18 @@ public class Knapsack_0_1_DP
         // for Selecting items
         int i =n;
         int k = T_Weight;
-        Vector<Integer> selected_benefit = new Vector<>();
-        Vector<Integer> selected_weight = new Vector<>();
+        //Vector<Integer> selected_benefit = new Vector<>();
+        //Vector<Integer> selected_weight = new Vector<>();
 
+       
+        System.out.println("\nItems in Knapsack :\n");
         while(i > 0 && k > 0)
         {
             if(c[i][k] != c[i-1][k])
             {
-                selected_benefit.add(benefits[i-1]);
-                selected_weight.add(weights[i-1]);
-
+                System.out.println("Benefits in Knapsack :"+benefits[i-1]);
+                System.out.println("Weights in Knapsack :"+weights[i-1]);
+                System.out.println();
                 k = k - weights[i-1];
                 i = i-1;
             }
@@ -56,8 +58,7 @@ public class Knapsack_0_1_DP
             }
         }
 
-        System.out.println("Benefits in Knapsack :"+selected_benefit);
-        System.out.println("Benefits in Knapsack :"+selected_weight);
+        System.out.println("Total Benefit :"+c[n][T_Weight]);
     }
 
     

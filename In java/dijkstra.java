@@ -1,63 +1,44 @@
 import java.util.*;
-class dijkstras
-{
-   
-    public static void dijkstras_algo(int[] d,int[][] w,boolean[] visited,int n)
-    {
-        int k=0,u=0,min;
-        while(k<n)
-        {   min=999;
-            for(int i=0;i<n;i++)
-            {
-                if(d[i]<min && !visited[i])
-                {
-                    min=d[i];
-                    u=i;
+
+class dijkstra {
+    public static void dijkstras_algo(int[] d, int[][] w, boolean[] visited, int n) {
+        int u;
+        for (int k = 0; k < n - 1; k++) {
+            u = -1;
+            for (int i = 0; i < n; i++) {
+                if (!visited[i] && (u == -1 || d[i] < d[u])) {
+                    u = i;
                 }
             }
-            visited[u]=true;
-            for(int v=0;v<n;v++)
-            {
-                if(w[u][v]!=999)
-                {
-                    if((d[u]+w[u][v])<d[v])
-                    {
-                        d[v] = d[u]+w[u][v];
-                    }
+            visited[u] = true;
+            for (int v = 0; v < n; v++) {
+                if (!visited[v] && w[u][v] != 999) {
+                    d[v] = Math.min(d[v], d[u] + w[u][v]);
                 }
             }
-            k++;
-
         }
-
-        for(int i=0;i<n;i++)
-        {
-            System.out.println("Cost of "+i+"is :"+d[i]+" ");
+        for (int i = 0; i < n; i++) {
+            System.out.println("Cost of " + i + " is: " + d[i]);
         }
     }
 
-    public static void main(String args[])
-    {    int n = 5;
-    int[] d = new int[n];
-    int[][] w = new int[n][n];
-    boolean[] visited = new boolean[n];
-    Scanner sc = new Scanner(System.in);
-    System.out.println("ENter the weight matrix where unreachable and cost of same vertes is 999 ");
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-            w[i][j] = sc.nextInt();
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of vertices:");
+        int n = sc.nextInt();
+        int[] d = new int[n];
+        int[][] w = new int[n][n];
+        boolean[] visited = new boolean[n];
+        System.out.println("Enter the weight matrix where unreachable vertices are represented by 999:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                w[i][j] = sc.nextInt();
+            }
         }
+        System.out.println("\n");
+        Arrays.fill(d, Integer.MAX_VALUE);
+        d[0] = 0;
+        dijkstras_algo(d, w, visited, n);
+        sc.close();
     }
-    d[0]=0;
-    for(int i=1;i<n;i++)
-    {
-        d[i] = 999;
-    }
-
-    dijkstras_algo(d,w,visited,n);
-
-    }
-
 }
